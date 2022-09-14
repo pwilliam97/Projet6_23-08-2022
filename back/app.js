@@ -62,7 +62,6 @@ mongoose.connect(
   });
 
 
-  app.use ('/api/sauces', stuffRoutes);
   app.use ('/api/auth', userRoutes);
 
 module.exports = app;

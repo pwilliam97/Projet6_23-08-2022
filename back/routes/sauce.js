@@ -4,8 +4,6 @@ const multerConfig = require('../middleware/multer-config');
 
 const router = express.Router();
 
-
-//const sauceCtrl = require('../controllers/sauce');
 const Sauce = require ('../models/sauces')
 
 const sauceCtrl = require('../controllers/sauce')

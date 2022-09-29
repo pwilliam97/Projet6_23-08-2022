@@ -1,6 +1,8 @@
+ACCESS_TOKEN_SECRET = 'S9DqM=bSA6u%YWNy'
+
 //importation app express 
 const express = require ('express');
-
+const path = require('path');
 const app = express ();
 
 app.use(express.json());
@@ -8,10 +10,11 @@ app.use(express.json());
 //Importation app Mongoose 
 const mongoose = require('mongoose');
 
-const Thing = require('./models/thing');
+const Sauce = require('./models/sauces');
 
 //On enregistre le routeur dans l'application on l'importe
 const userRoutes = require ('./routes/user')
+const sauceRoutes = require ('./routes/sauce')
 
 // Lien avec la Database MongoDB
 mongoose.connect(
@@ -29,39 +32,8 @@ mongoose.connect(
     next();
   });
 
-  app.post('/api/sauces', (req, res, next) => {
-    delete req.body._id;
-    const thing = new Thing ({
-      ...req.body
-    });
-    thing.save()
-    .then(() => res.status(201).json({message : 'objet enregistré !'}))
-    .catch(error => res.status(400).json({error}));
-  });
-
-  app.get('/api/sauces', (req, res, next) => {
-    const sauces = [
-      {
-        _id: 'oeihfzeoi',
-        title: 'Mon premier objet',
-        description: 'Les infos de mon premier objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 4900,
-        userId: 'qsomihvqios',
-      },
-      {
-        _id: 'oeihfzeomoihi',
-        title: 'Mon deuxième objet',
-        description: 'Les infos de mon deuxième objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 2900,
-        userId: 'qsomihvqios',
-      },
-    ];
-    res.status(200).json(sauces);
-  });
-
-
+  app.use('/api/sauces', sauceRoutes);
   app.use ('/api/auth', userRoutes);
+  app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;

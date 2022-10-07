@@ -19,7 +19,7 @@ exports.likeUser = (req, res, next) => {
                     .catch(error => res.status(400).json(error))
             } else {
                 // 3. sinon erreur
-                return res.status(400).json(error)
+                return error => res.status(400).json(error)
             }
         }
          
@@ -38,7 +38,7 @@ exports.likeUser = (req, res, next) => {
                     .catch(error => res.status(400).json(error))
             } else {
                 // 3. sinon erreur
-                res.status(400).json(error)
+                return error => res.status(400).json(error)
             }
         }
 

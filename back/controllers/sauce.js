@@ -13,7 +13,6 @@ exports.createSauce = (req, res, next) => {
         dislikes : 0,
         usersLiked : [],
         usersDisliked :[],
-        heat : 1-10, 
         imageUrl : `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     });
     sauce.save()
@@ -24,9 +23,13 @@ exports.createSauce = (req, res, next) => {
 // REPONSE ATTENDUE : -PUT- met a jour la sauce avec l'id fourni 
 exports.modifySauce = (req, res, next) => {
     const SauceObject = req.file ? {
-        ...JSON.parse(req.body.sauce),
+        name : req.body.name,
+        manufacturer : req.body.manufacturer,
+        description : req.body.description,
+        mainPepper : req.body.mainPepper,
+        heat : req.body.heat,
         imageUrl : `${req.protocol}://${req.get('host')}/images/${req.file.filename}` 
-    } : { ...req.body }; 
+    } : { ...req.body.sauce }; 
     // delete SauceObject._userId;
     Sauce.findOne({_id: req.params.id})
         .then((sauce) => {

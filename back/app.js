@@ -6,6 +6,11 @@ const express = require ('express');
 const app = express ();
 app.use(express.json());
 
+// importation du sanitize 
+const mongoSanitize = require ('express-mongo-sanitize')
+
+app.use(mongoSanitize());
+
 //importation de 'path' afin de définir les chemins
 const path = require('path');
 

@@ -9,6 +9,7 @@ const Sauce = require ('../models/sauces')
 const sauceCtrl = require('../controllers/sauce')
 const likeCtrl = require ('../controllers/like')
 
+
 // REPONSE ATTENDUE : -GET- Renvoi un tableau de toutes les sauces de la base de données
 router.get('/', auth, multerConfig, sauceCtrl.getAllSauce);
 

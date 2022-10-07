@@ -10,7 +10,7 @@ exports.likeUser = (req, res, next) => {
             // 1. vérifier si l'utilsateur a déjà voté
             // - est-ce que l'utilisateur est dans usersLiked ?
             // - est-ce que l'utilisateur est dans usersDisliked ? 
-            if( !sauce.usersLiked.includes(req.body.userId) && !sauce.usersDisliked.includes(req.body.userId)){
+            if( !sauce.usersLiked.includes(req.body.userId) || !sauce.usersDisliked.includes(req.body.userId)){
                  // 2. si l'utilisateur n'a pas voté
                 // - likes +1
                 // - ajoute dans usersLiked
@@ -29,7 +29,7 @@ exports.likeUser = (req, res, next) => {
             // 1. vérifier si l'utilsateur a déjà voté
             // - est-ce que l'utilisateur est dans usersLiked ?
             // - est-ce que l'utilisateur est dans usersDisliked ? 
-            if( !sauce.usersLiked.includes(req.body.userId) && !sauce.usersDisliked.includes(req.body.userId)){
+            if( !sauce.usersLiked.includes(req.body.userId) || !sauce.usersDisliked.includes(req.body.userId)){
                 // 2. si l'utilisateur n'a pas voté
                 // - likes +1
                 // - ajoute dans usersLiked
@@ -54,7 +54,7 @@ exports.likeUser = (req, res, next) => {
                    .catch(error => res.status(400).json(error))
            } else {
                // 3. sinon erreur
-               error => res.status(400).json(error)
+                error => res.status(400).json(error)
            }
 
             

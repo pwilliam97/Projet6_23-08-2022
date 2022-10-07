@@ -13,6 +13,7 @@ exports.createSauce = (req, res, next) => {
         dislikes : 0,
         usersLiked : [],
         usersDisliked :[],
+        heat : 1-10, 
         imageUrl : `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     });
     sauce.save()

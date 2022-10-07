@@ -1,14 +1,18 @@
-ACCESS_TOKEN_SECRET = 'S9DqM=bSA6u%YWNy'
 
-//importation app express 
+
+
+//importation du package express 
 const express = require ('express');
-const path = require('path');
 const app = express ();
-
 app.use(express.json());
+
+//importation de 'path' afin de définir les chemins
+const path = require('path');
 
 //Importation app Mongoose 
 const mongoose = require('mongoose');
+const dotenv = require('dotenv')
+const result = dotenv.config()
 
 const Sauce = require('./models/sauces');
 
@@ -18,7 +22,7 @@ const sauceRoutes = require ('./routes/sauce')
 
 // Lien avec la Database MongoDB
 mongoose.connect(
-  'mongodb+srv://Piquante_p6:Piquante152468379@cluster0.kubrrgq.mongodb.net/?retryWrites=true&w=majority',
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.kubrrgq.mongodb.net/?retryWrites=true&w=majority'`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))

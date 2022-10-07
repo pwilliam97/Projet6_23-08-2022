@@ -8,6 +8,10 @@ const user = require('../models/user');
 //On importe le package des token d'identification
 const jwt = require('jsonwebtoken')
 
+//variable d'environnement
+const dotenv = require('dotenv')
+const result = dotenv.config()
+
 //création du controller signup
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
@@ -40,7 +44,7 @@ exports.login = (req, res, next) => {
                         userId : user._id,
                         token : jwt.sign(
                             {userId: user._id},
-                            ACCESS_TOKEN_SECRET,
+                            process.env.YOUR_TOKEN,
                             { expiresIn: '24h'},
                         )
                     });
